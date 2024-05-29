@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">visitjogja</string>
+    <string name="google_fonts_certificate">acme</string>
 </resources>
