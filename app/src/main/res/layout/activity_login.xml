@@ -9,23 +9,69 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/inputUsername"
-        android:layout_width="254dp"
-        android:layout_height="51dp"
-        android:hint="Username"
-        android:fontFamily="@font/robotocondensed"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLoginInAction"
+        android:id="@+id/editText"
+        android:layout_width="314dp"
+        android:layout_height="58dp"
+        android:background="@drawable/background_input"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.579" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        android:layout_width="220dp"
+        android:layout_height="57dp"
+        android:background="@null"
+        android:fontFamily="@font/robotocondensed"
+        android:hint="Password"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.578" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="314dp"
+        android:layout_height="58dp"
+        android:background="@drawable/background_input"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
+
+    <EditText
+        android:id="@+id/inputUsername"
+        android:layout_width="220dp"
+        android:layout_height="57dp"
+        android:background="@null"
+        android:fontFamily="@font/robotocondensed"
+        android:hint="Username"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.467" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLoginInAction"
         android:layout_width="314dp"
         android:layout_height="58dp"
+        android:background="@drawable/button_with_stroke"
         android:fontFamily="@font/alata"
         android:text="Login"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -34,7 +80,5 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86"
-        android:background="@drawable/button_with_stroke"
-        android:textAllCaps="false"/>
+        app:layout_constraintVertical_bias="0.705" />
 </androidx.constraintlayout.widget.ConstraintLayout>
