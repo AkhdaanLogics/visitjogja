@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn = (Button) findViewById(R.id.buttonLogin);
-        Button btn1 = (Button) findViewById(R.id.buttonSign);
+        Button btn = findViewById(R.id.buttonLogin);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(intent);
             }
         });
+        Button btn1 = findViewById(R.id.buttonSign);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

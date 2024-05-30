@@ -8,7 +8,8 @@
     android:background="@drawable/gradient"
     tools:context=".LoginActivity">
 
-    <EditText
+    <TextView
+        android:id="@+id/bgEmail"
         android:layout_width="314dp"
         android:layout_height="58dp"
         android:background="@drawable/background_input"
@@ -17,8 +18,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.352"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintVertical_bias="0.353" />
 
     <EditText
         android:id="@+id/inputNewEmail"
@@ -27,6 +27,7 @@
         android:background="@null"
         android:fontFamily="@font/robotocondensed"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,17 +37,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.353" />
 
-    <EditText
+    <TextView
+        android:id="@+id/bgPassword"
         android:layout_width="314dp"
         android:layout_height="58dp"
         android:background="@drawable/background_input"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.579"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintVertical_bias="0.579" />
 
     <EditText
         android:id="@+id/inputNewPassword"
@@ -55,6 +56,7 @@
         android:background="@null"
         android:fontFamily="@font/robotocondensed"
         android:hint="Password"
+        android:inputType="textPassword"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +66,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.578" />
 
-    <EditText
+    <TextView
+        android:id="@+id/bgUsername"
         android:layout_width="314dp"
         android:layout_height="58dp"
         android:background="@drawable/background_input"
@@ -73,8 +76,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <EditText
         android:id="@+id/inputNewUsername"
@@ -83,6 +85,7 @@
         android:background="@null"
         android:fontFamily="@font/robotocondensed"
         android:hint="Username"
+        android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "600638467932",
+    "project_id": "wisatajogja-2af41",
+    "storage_bucket": "wisatajogja-2af41.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600638467932:android:5ded9ee885968a5657db99",
+        "android_client_info": {
+          "package_name": "com.andorid.visitjogja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4F0I4Ck8ZjlsNGGFBx9btPqh_4cA1a7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
