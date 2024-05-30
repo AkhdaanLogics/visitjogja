@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,8 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignActivity extends AppCompatActivity {
 
     private EditText usernameEditText, emailEditText, passwordEditText;
-    private Button signUpButton;
-    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +38,9 @@ public class SignActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String emailNew = emailEditText.getText().toString();
-                String userNew = usernameEditText.getText().toString();
-                String passNew = passwordEditText.getText().toString();
+                String emailNew = emailEditText.getText().toString().trim();
+                String userNew = usernameEditText.getText().toString().trim();
+                String passNew = passwordEditText.getText().toString().trim();
 
                 if (TextUtils.isEmpty(emailNew)) {
                     Toast.makeText(SignActivity.this, "Please enter your email", Toast.LENGTH_LONG).show();
@@ -72,17 +71,20 @@ public class SignActivity extends AppCompatActivity {
 
     private void registerUser(String emailNew, String userNew, String passNew) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(emailNew, passNew).addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(emailNew, passNew).addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(SignActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     firebaseUser.sendEmailVerification();
-//                    Intent intent = new Intent(SignActivity.this, MainActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent = new Intent(SignActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(SignActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
                 }
             }
         });
