@@ -7,6 +7,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,8 @@ public class SignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         emailEditText = findViewById(R.id.inputNewEmail);
         usernameEditText = findViewById(R.id.inputNewUsername);
         passwordEditText = findViewById(R.id.inputNewPassword);
@@ -74,7 +77,9 @@ public class SignActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(emailNew, passNew).addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                ProgressBar progressBar = findViewById(R.id.progressBar);
                 if (task.isSuccessful()){
+                    progressBar.setVisibility(View.VISIBLE);
                     Toast.makeText(SignActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     firebaseUser.sendEmailVerification();
@@ -84,6 +89,7 @@ public class SignActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
+                    progressBar.setVisibility(View.VISIBLE);
                     Toast.makeText(SignActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
                 }
             }
