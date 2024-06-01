@@ -3,6 +3,7 @@ package com.andorid.visitjogja;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,23 +16,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignActivity extends AppCompatActivity {
 
     private EditText usernameEditText, emailEditText, passwordEditText;
-
+    private static final String TAG = "SignActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
         emailEditText = findViewById(R.id.inputNewEmail);
         usernameEditText = findViewById(R.id.inputNewUsername);
         passwordEditText = findViewById(R.id.inputNewPassword);
@@ -74,12 +74,12 @@ public class SignActivity extends AppCompatActivity {
 
     private void registerUser(String emailNew, String userNew, String passNew) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.signInWithEmailAndPassword(emailNew, passNew).addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
+
+        auth.createUserWithEmailAndPassword(emailNew, passNew).addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 ProgressBar progressBar = findViewById(R.id.progressBar);
                 if (task.isSuccessful()){
-                    progressBar.setVisibility(View.VISIBLE);
                     Toast.makeText(SignActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
                     firebaseUser.sendEmailVerification();
@@ -89,8 +89,22 @@ public class SignActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    progressBar.setVisibility(View.VISIBLE);
                     Toast.makeText(SignActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        passwordEditText.setError("Your password is too weak, you should mix letters, numbers, and symbols");
+                        passwordEditText.requestFocus();
+                    } catch(FirebaseAuthInvalidCredentialsException e){
+                        emailEditText.setError("Your email is invalid or already exists");
+                        emailEditText.requestFocus();
+                    } catch (FirebaseAuthUserCollisionException e){
+                        emailEditText.setError("Your email is already registered. Try to use another email");
+                        emailEditText.requestFocus();
+                    } catch (Exception e){
+                        Log.e(TAG, e.getMessage());
+                        Toast.makeText(SignActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

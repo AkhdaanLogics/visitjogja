@@ -8,17 +8,28 @@
     android:background="@drawable/gradient"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/bgPassword"
         android:layout_width="314dp"
         android:layout_height="58dp"
         android:background="@drawable/background_input"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.579" />
+
+    <ImageView
+        android:id="@+id/hidePassword"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.578" />
 
     <EditText
         android:id="@+id/inputPassword"
@@ -36,8 +47,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.578" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/bgUsername"
         android:layout_width="314dp"
         android:layout_height="58dp"
         android:background="@drawable/background_input"
@@ -49,12 +60,12 @@
         app:layout_constraintVertical_bias="0.466" />
 
     <EditText
-        android:id="@+id/inputUsername"
+        android:id="@+id/inputEmail"
         android:layout_width="220dp"
         android:layout_height="57dp"
         android:background="@null"
         android:fontFamily="@font/robotocondensed"
-        android:hint="Username"
+        android:hint="Email"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
