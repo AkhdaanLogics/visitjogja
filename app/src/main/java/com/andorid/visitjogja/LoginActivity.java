@@ -1,11 +1,15 @@
 package com.andorid.visitjogja;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -39,6 +43,20 @@ public class LoginActivity extends AppCompatActivity {
 
         authProfile = FirebaseAuth.getInstance();
 
+        ImageView hidePassword = findViewById(R.id.hidePassword);
+        hidePassword.setImageResource(R.drawable.hide_pwd);
+        hidePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (passwordCreated.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+                    passwordCreated.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    hidePassword.setImageResource(R.drawable.hide_pwd);
+                } else {
+                    passwordCreated.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    hidePassword.setImageResource(R.drawable.show_pwd);
+                }
+            }
+        });
         Button login = findViewById(R.id.buttonLoginInAction);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailCreated.getText().toString();
                 String password = passwordCreated.getText().toString();
 
-                if (email.isEmpty()) {
+                if (TextUtils.isEmpty(email)) {
                     Toast.makeText(LoginActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
                     usernameCreated.setError("Email cannot be empty");
                     usernameCreated.requestFocus();
@@ -54,10 +72,14 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
                     emailCreated.setError("Invalid email address");
                     emailCreated.requestFocus();
-                } else if (password.isEmpty()) {
+                } else if (TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
                     passwordCreated.setError("Password cannot be empty");
                     usernameCreated.requestFocus();
+                } else if (password.length() < 8) {
+                    Toast.makeText(LoginActivity.this, "Password must be at least 8 characters", Toast.LENGTH_LONG).show();
+                    passwordCreated.setError("Password must be at least 8 characters");
+                    passwordCreated.requestFocus();
                 } else {
                     loginUser(email, password);
                 }

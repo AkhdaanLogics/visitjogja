@@ -3,12 +3,14 @@ package com.andorid.visitjogja;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,20 @@ public class SignActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.inputNewUsername);
         passwordEditText = findViewById(R.id.inputNewPassword);
 
+        ImageView hidePassword = findViewById(R.id.hidePassword);
+        hidePassword.setImageResource(R.drawable.hide_pwd);
+        hidePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (passwordEditText.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+                    passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    hidePassword.setImageResource(R.drawable.hide_pwd);
+                } else {
+                    passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    hidePassword.setImageResource(R.drawable.show_pwd);
+                }
+            }
+        });
         Button buttonSign = findViewById(R.id.buttonSignInAction);
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +94,6 @@ public class SignActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(emailNew, passNew).addOnCompleteListener(SignActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                ProgressBar progressBar = findViewById(R.id.progressBar);
                 if (task.isSuccessful()){
                     Toast.makeText(SignActivity.this, "User registered successfully", Toast.LENGTH_LONG).show();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
