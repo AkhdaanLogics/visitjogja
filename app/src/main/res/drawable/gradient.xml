@@ -8,4 +8,8 @@
         android:endColor = "#D80032"
         android:angle = "90"
         android:type = "linear" />
+
+    <corners
+        android:bottomLeftRadius="160sp"
+        android:bottomRightRadius="160sp"/>
 </shape>
